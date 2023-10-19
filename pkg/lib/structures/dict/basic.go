@@ -2,7 +2,8 @@ package dict
 
 import "sort"
 
-// Map data structure.
+// Map data structure is a wrapper around the native Go maps. It has a bit more accessible interface,
+// as well as supporting methods for map sorting which tends to be cumbersome.
 type Map[K comparable, V any] struct {
 	store map[K]V
 }

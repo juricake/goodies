@@ -1,5 +1,6 @@
 package set
 
+// Set data structure is a wrapper around the idiomatic way to emulate sets in Go.
 type Set[V comparable] struct {
 	store map[V]struct{}
 }

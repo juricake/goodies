@@ -1,6 +1,9 @@
 package dict
 
-// SliceMap data structure.
+import "sort"
+
+// SliceMap is a data structure designed to operate over maps with multiple values belonging to a single key.
+// It simplifies operation like initialization, appending, or sorting by conditions.
 type SliceMap[K comparable, V comparable] struct {
 	store map[K][]V
 }
@@ -54,6 +57,34 @@ func (s *SliceMap[K, V]) ContainsWithin(key K, value V) bool {
 	}
 
 	return false
+}
+
+// KeysSorted returns a sorted slice of keys, conforming to the key comparator func.
+func (s *SliceMap[K, V]) KeysSorted(comparator func(one, two K) bool) []K {
+	keys := make([]K, 0, len(s.store))
+	for k := range s.store {
+		keys = append(keys, k)
+	}
+
+	sort.SliceStable(keys, func(i, j int) bool {
+		return comparator(keys[i], keys[j])
+	})
+
+	return keys
+}
+
+// KeysSortedByValue returns a sorted slice of keys, conforming to the value comparator func.
+func (s *SliceMap[K, V]) KeysSortedByValue(comparator func(one, two []V) bool) []K {
+	keys := make([]K, 0, len(s.store))
+	for k := range s.store {
+		keys = append(keys, k)
+	}
+
+	sort.SliceStable(keys, func(i, j int) bool {
+		return comparator(s.Get(keys[i]), s.Get(keys[j]))
+	})
+
+	return keys
 }
 
 // Size of the map.

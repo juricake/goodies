@@ -4,7 +4,8 @@ import (
 	"github.com/juricake/goodies/pkg/lib/structures/set"
 )
 
-// Distinct slice data structure.
+// Distinct slice data structure is a wrapper around the slice, with a guarantee of uniqueness.
+// This means there will never be duplicates in a slice.
 type Distinct[V comparable] struct {
 	store  []V
 	filter *set.Set[V]
