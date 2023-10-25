@@ -26,6 +26,11 @@ func (s *SliceMap[K, V]) Get(key K) []V {
 	return s.store[key]
 }
 
+// Del value belonging to a specified key.
+func (s *SliceMap[K, V]) Del(key K) {
+	delete(s.store, key)
+}
+
 // Append a new value to a list of values belonging to a specified key.
 // This operation will auto-create the underlying slice if necessary.
 func (s *SliceMap[K, V]) Append(key K, value V) {

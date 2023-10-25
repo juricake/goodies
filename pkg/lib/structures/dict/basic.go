@@ -25,6 +25,11 @@ func (m *Map[K, V]) Get(key K) V {
 	return m.store[key]
 }
 
+// Del value belonging to a specified key.
+func (m *Map[K, V]) Del(key K) {
+	delete(m.store, key)
+}
+
 // Contains returns true if a key exists, false otherwise.
 func (m *Map[K, V]) Contains(key K) bool {
 	_, exists := m.store[key]
