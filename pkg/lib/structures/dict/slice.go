@@ -34,12 +34,7 @@ func (s *SliceMap[K, V]) Del(key K) {
 // Append a new value to a list of values belonging to a specified key.
 // This operation will auto-create the underlying slice if necessary.
 func (s *SliceMap[K, V]) Append(key K, value V) {
-	if !s.Contains(key) {
-		s.store[key] = make([]V, 0)
-	}
-	values := s.store[key]
-	values = append(values, value)
-	s.store[key] = values
+	s.store[key] = append(s.store[key], value)
 }
 
 // Contains returns true if a key exists, false otherwise.
