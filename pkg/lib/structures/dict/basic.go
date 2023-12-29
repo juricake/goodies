@@ -64,6 +64,16 @@ func (m *Map[K, V]) KeysSortedByValue(comparator func(one, two V) bool) []K {
 	return keys
 }
 
+// Values returns all values and no keys
+func (m *Map[K, V]) Values() []V {
+	values := make([]V, 0, len(m.store))
+	for _, v := range m.store {
+		values = append(values, v)
+	}
+
+	return values
+}
+
 // Size of the map.
 func (m *Map[K, V]) Size() int {
 	return len(m.store)
